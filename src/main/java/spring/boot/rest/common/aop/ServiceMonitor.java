@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import spring.boot.rest.common.consts.RestConst;
@@ -28,7 +29,8 @@ public class ServiceMonitor {
 
     private Logger logger = LoggerFactory.getLogger(ServiceMonitor.class);
 
-    @Around("execution(* spring.boot.rest.demo..*Service.*(..))")
+
+    @Around("execution(* spring.boot.rest.demo..*Controller.*(..))")
     public Object logServiceAccess(ProceedingJoinPoint pjp) {
         long start = System.currentTimeMillis();
 
@@ -71,6 +73,7 @@ public class ServiceMonitor {
                 ((DataResult<?>) result).setIsSuccess(true);
             }
         } catch (Throwable e) {
+
             if (result != null && result instanceof DataResult) {
                 DataResult<?> errorResult = (DataResult<?>) result;
                 errorResult.setIsSuccess(false);
@@ -84,6 +87,11 @@ public class ServiceMonitor {
                 result = new DataResult<Object>(RestConst.ErrorCode.UNKNOWN, e.getMessage());
             }
             logger.error(fullMethodName + "执行出错,详情:", e);
+
+            if (e instanceof DataAccessException) {
+                //数据库层面的异常,继续向上抛,否则事务无法回滚
+                ((DataResult<Object>) result).setErrorCode(RestConst.ErrorCode.DATABASE_ERROR);
+            }
         }
 
 

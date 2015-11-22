@@ -20,10 +20,10 @@ public class DruidConfiguration {
     }
 
     @Bean(destroyMethod = "close")
-    public DataSource druidDataSource(@Value("${spring.datasource.driverClassName}") String driver,
-                                      @Value("${spring.datasource.url}") String url,
-                                      @Value("${spring.datasource.username}") String username,
-                                      @Value("${spring.datasource.password}") String password) {
+    public DataSource druidDataSource(@Value("${master.jdbc.driverClassName}") String driver,
+                                      @Value("${master.jdbc.url}") String url,
+                                      @Value("${master.jdbc.username}") String username,
+                                      @Value("${master.jdbc.password}") String password) {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driver);
         druidDataSource.setUrl(url);

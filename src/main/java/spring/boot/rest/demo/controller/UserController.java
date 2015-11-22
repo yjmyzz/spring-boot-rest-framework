@@ -37,6 +37,11 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @RequestMapping(value = USER + "/batchAdd", method = RequestMethod.POST)
+    public DataResult<List<UserData>> batchAdd(@RequestBody List<UserData> users) {
+        return userService.addUsers(users);
+    }
+
     @RequestMapping(value = USER + "/update", method = RequestMethod.POST)
     public DataResult<UserData> update(@RequestBody UserData user) {
         return userService.updateUser(user);

@@ -17,6 +17,8 @@ public interface UserService extends IService<User> {
 
     DataResult<UserData> addUser(UserData user);
 
+    DataResult<List<UserData>> addUsers(List<UserData> users);
+
     DataResult<UserData> updateUser(UserData user);
 
     DataResult<Integer> deleteUser(int userId);

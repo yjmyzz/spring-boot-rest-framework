@@ -3,6 +3,7 @@ package spring.boot.rest.demo.domain;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import spring.boot.rest.common.validator.Mobile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -39,8 +40,15 @@ public class UserData {
     @Min(value = 0, message = "工资不能为负数")
     private Integer salary;
 
-
+    /**
+     * X龄后的标签
+     */
     private String tag;
+
+
+    //@Mobile
+    private String mobile;
+
 
     /**
      * 获取流水号
@@ -181,6 +189,14 @@ public class UserData {
         return tag;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
 
     /**
      * 强烈建议所有domain model都重写toString,方便调试
@@ -197,6 +213,7 @@ public class UserData {
                 ", age=" + age +
                 ", salary=" + salary +
                 ", tag='" + tag + '\'' +
+                ", mobile='" + mobile + '\'' +
                 '}';
     }
 }

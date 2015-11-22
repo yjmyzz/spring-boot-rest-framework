@@ -38,9 +38,7 @@ public class MybasitConfiguration {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean
                 .setMapperLocations(resolver.getResources("classpath:mybatis/demo/*.xml"));
-
         sqlSessionFactoryBean.setTypeAliasesPackage("spring.boot.rest.demo.entity");
-
         MapperInterceptor tkMapperInterceptor = new MapperInterceptor();
         Properties tkProp = new Properties();
         tkProp.setProperty("mappers", "spring.boot.rest.common.mapper.MyMapper");

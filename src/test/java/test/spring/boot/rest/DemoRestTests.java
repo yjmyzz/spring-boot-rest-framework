@@ -54,7 +54,7 @@ public class DemoRestTests {
         GZIPInputStream inflater = new GZIPInputStream(
                 new ByteArrayInputStream(entity.getBody()));
         try {
-            assertEquals("Hello World",
+            assertEquals("{\"data\":\"running\",\"errorCode\":null,\"errorDesc\":null,\"elapsedMilliseconds\":0,\"success\":true}",
                     StreamUtils.copyToString(inflater, Charset.forName("UTF-8")));
         } finally {
             inflater.close();

@@ -12,6 +12,8 @@ public class RestConst {
 
         public final static String UNKNOWN = "000";
         public final static String VALIDATE_FAIL = "001"; //参数校验失败
+        public final static String EMPTY_PARAM = "002"; //参数为空
+        public final static String DATABASE_ERROR = "003"; //数据库层面的错误
 
 
     }
