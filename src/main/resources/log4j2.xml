@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ABSOLUTE} &lt;%c&gt; %5p [%t]: %m%n"/>
+        </Console>
+
+        <RollingRandomAccessFile name="SERVICE_LOG_FILE" fileName="logs/spring-boot-rest/service.log"
+                                 filePattern="logs/$${date:yyyy-MM}/service-%d{yyyy-MM-dd}-%i.log.gz">
+            <!-- <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" /> -->
+            <PatternLayout pattern="%d{ABSOLUTE} &lt;%c&gt; %5p [%t]: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="JOB_LOG_FILE" fileName="logs/spring-boot-rest/job.log"
+                                 filePattern="logs/$${date:yyyy-MM}/job-%d{yyyy-MM-dd}-%i.log.gz">
+            <!-- <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" /> -->
+            <PatternLayout pattern="%d{ABSOLUTE} &lt;%c&gt; %5p [%t]: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+    <Loggers>
+        <!-- Root Logger -->
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT"/>
+            <!--<AppenderRef ref="SERVICE_LOG_FILE"/>-->
+            <!--<AppenderRef ref="JOB_LOG_FILE"/>-->
+        </Root>
+
+
+        <!-- rest demo module Logger -->
+        <Logger name="spring.boot.rest" level="INFO" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="SERVICE_LOG_FILE"/>
+        </Logger>
+
+        <!-- Quartz Logger -->
+        <Logger name="org.quartz" level="INFO" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="JOB_LOG_FILE"/>
+        </Logger>
+
+        <!-- - - - - - - - BEGIN: DAO LOGGERS - - - - - - - -->
+        <Logger name="spring.boot.rest.demo.mapper" level="DEBUG" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="SERVICE_LOG_FILE"/>
+        </Logger>
+        <!-- - - - - - - - END: DAO LOGGERS - - - - - - - -->
+
+    </Loggers>
+</Configuration>

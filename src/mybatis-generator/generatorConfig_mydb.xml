@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mydb"
+                        userId="root"
+                        password="raycool">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="test.sample.mybatis.model"
+                            targetProject="../test/java/"/>
+
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="../test/resources/"/>
+
+        <javaClientGenerator targetPackage="test.sample.mybatis.mapper"
+                             targetProject="../test/java/"
+                             type="XMLMAPPER"/>
+
+        <table tableName="T_User" domainObjectName="User"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="d_id" sqlStatement="MYSQL" identity="true"/>
+            <columnRenamingRule searchString="^D_"
+                                replaceString=""/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
