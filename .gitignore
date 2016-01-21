@@ -1,7 +1,6 @@
 .gradle
 *.iml
 build/
-java/
 .project
 .settings/
 logs/
